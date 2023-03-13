@@ -1,6 +1,8 @@
 package qwew.net;
 
 public interface IConnector {
+
     String get();
-    void send();
+
+    void send(String msg);
 }
