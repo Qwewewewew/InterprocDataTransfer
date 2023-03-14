@@ -2,6 +2,7 @@ package qwew.net;
 
 import java.net.*;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class UDPConnector implements IConnector{
 
@@ -17,7 +18,7 @@ public class UDPConnector implements IConnector{
         }
     }
 
-    //Listens for an incoming package, 1KB limit for now
+    //Listens for an incoming package, 1 KB limit for now
     @Override
     public String get() {
         String msg; //Empty String to extract data to
@@ -35,7 +36,7 @@ public class UDPConnector implements IConnector{
     @Override
     public void send(String msg, String toIP, int toPort) {
         try {
-            byte[] buffer = msg.getBytes(); //Converting String to bytes array
+            byte[] buffer = msg.getBytes(StandardCharsets.UTF_8); //Converting String to bytes array
             try{
                 InetAddress destIP = InetAddress.getByName(toIP); //Converting from String to InetAddress
 
