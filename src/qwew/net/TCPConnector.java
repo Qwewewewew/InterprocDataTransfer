@@ -3,7 +3,6 @@ package qwew.net;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.io.*;
 
 public class TCPConnector implements IConnector{
 
@@ -27,3 +26,4 @@ public class TCPConnector implements IConnector{
 
     }
 }
+//Still empty but I'm working on it
