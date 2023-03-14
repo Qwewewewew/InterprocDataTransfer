@@ -1,40 +1,36 @@
 package qwew.net;
 
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
+import java.net.*;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 public class UDPConnector implements IConnector{
 
-    private int port;
-    InetAddress iaddr;
     private DatagramSocket dgSocket;
 
-    public UDPConnector(String addr, int port){
+    public UDPConnector(int port) {
+        try {
+            dgSocket = new DatagramSocket(port);
+        }catch (SocketException e){
+            System.out.println("Something's wrong with socket:");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public UDPConnector(){
         try{
-            this.port = port;
-            this.iaddr = InetAddress.getByName(addr);
-        }catch(UnknownHostException e1){
-            System.out.println("Unable to connect to host. Host set to 127.0.0.1");
-            System.out.println(e1.getMessage());
-            try{
-                this.iaddr = InetAddress.getByName("127.0.0.1");
-            }catch(UnknownHostException e2){
-                System.out.println("Unknown error occured: "+e2.getMessage());
-            }
+            this.dgSocket = new DatagramSocket();
+        }catch(SocketException e){
+            System.out.println("Something's wrong with socket: ");
+            System.out.println(e.getMessage());
         }
     }
 
     @Override
     public String get() {
         StringBuilder msg = new StringBuilder();
+        msg.append('-');
         try {
-            this.dgSocket = new DatagramSocket(this.port);
-
-            while (msg.toString().toCharArray()[msg.length()-1] != "0".toCharArray()[0]) {
-
+            while (msg.toString().toCharArray()[msg.length()-1] != '0') {
                 DatagramPacket pack = new DatagramPacket(new byte[1024], 1024);
                 dgSocket.receive(pack);
                 msg.append(new String(pack.getData()));
@@ -46,15 +42,23 @@ public class UDPConnector implements IConnector{
     }
 
     @Override
-    public void send(String msg) {
+    public void send(String msg, String toIP, int toPort) {
         try {
             byte[] buffer = msg.getBytes();
-            DatagramPacket pack = new DatagramPacket(buffer, buffer.length, iaddr, port);
-            DatagramSocket ds = new DatagramSocket();
-            ds.send(pack);
-            ds.close();
+            try{
+                InetAddress destIP = InetAddress.getByName(toIP);
+                DatagramPacket pack = new DatagramPacket(buffer, buffer.length, destIP, toPort);
+                dgSocket.send(pack);
+                dgSocket.close();
+            }catch(UnknownHostException e){
+                System.out.println("Something's wrong with the host: ");
+                System.out.println(e.getMessage());
+            }
+
+            System.out.println("--SENT--");
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            System.out.println("An error has occurred: ");
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -1,17 +1,33 @@
 package qwew.net;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        IConnector connector = new UDPConnector("127.0.0.1", 8080);
+
         Scanner in = new Scanner(System.in);
-        boolean isReceiver = in.nextBoolean();
-        if(isReceiver){
+        System.out.println("Set up as reciever?[y/n]");
+        String isReceiver = in.next();
+
+        System.out.println("Enter port to bind:");
+        int port = in.nextInt();
+
+        if(!Objects.equals(isReceiver, "n")){
+            IConnector connector = new UDPConnector(port);
+            System.out.println("\n--CONNECTOR IS SET UP--\n");
             System.out.println(connector.get());
         }
         else{
-            connector.send(in.next());
+            IConnector connector = new UDPConnector(port);
+            System.out.println("--CONNECTOR IS SET UP--\n");
+
+            System.out.println("Enter destination:");
+            String destIP = in.next();
+            int destPort = in.nextInt();
+
+            System.out.println("\nEnter message to send: ");
+            connector.send(in.next(), destIP, destPort);
         }
     }
 }

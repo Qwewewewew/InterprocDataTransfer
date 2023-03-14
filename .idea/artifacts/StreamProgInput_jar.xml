@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="StreamProgInput:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/StreamProgInput_jar</output-path>
+    <root id="archive" name="StreamProgInput.jar">
+      <element id="module-output" name="StreamProgInput" />
+    </root>
+  </artifact>
+</component>

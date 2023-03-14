@@ -4,5 +4,5 @@ public interface IConnector {
 
     String get();
 
-    void send(String msg);
+    void send(String msg, String toIP, int toPort);
 }
