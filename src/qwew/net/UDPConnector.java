@@ -25,18 +25,21 @@ public class UDPConnector implements IConnector{
         DatagramPacket pack = new DatagramPacket(new byte[1024], 1024); //Packet to "catch" data in
         try {
             dgSocket.receive(pack); //Receiving package
-            msg = new String(pack.getData()); //Extracting data
-            return msg; //Success probably
+            for(byte i: pack.getData()){
+                System.out.println(i);
+            } //Extracting data
+
         } catch (IOException e) {
             return e.getMessage();
         }
+        return "0";
     }
 
     //A method to send a message. Parameters: msg - the message itself, toIP - destination host, toPort - port on dest. host
     @Override
     public void send(String msg, String toIP, int toPort) {
         try {
-            byte[] buffer = msg.getBytes(StandardCharsets.UTF_8); //Converting String to bytes array
+            byte[] buffer = msg.replace(' ', '_').getBytes(StandardCharsets.UTF_8); //Converting String to bytes array
             try{
                 InetAddress destIP = InetAddress.getByName(toIP); //Converting from String to InetAddress
 
