@@ -1,21 +1,30 @@
 package qwew.net;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    static IConnector connector;
+    public static void main(String[] args) throws IOException {
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Set up as reciever?[y/n]");
-        String isReceiver = in.next();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Set up as receiver?[y/n]");
+        String isReceiver = reader.readLine();
 
-        System.out.println("Enter port to bind to:");
-        int port = in.nextInt();
+        int port;
+        try{
+            port = Integer.parseInt(args[0]);
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Input port to bind to: ");
+            port = Integer.parseInt(reader.readLine());
+        }
 
         //Receiver setup
         if(!Objects.equals(isReceiver, "n")){
-            IConnector connector = new UDPConnector(port);
+            connector = new UDPConnector(port);
             System.out.println("\n--CONNECTOR IS SET UP--\n");
             System.out.println(connector.get());
         }
@@ -23,16 +32,17 @@ public class Main {
         //Sender setup
         else{
             IConnector connector = new UDPConnector(port);
-            System.out.println("--CONNECTOR IS SET UP--\n");
+            System.out.println("\n--CONNECTOR IS SET UP--\n");
 
-            System.out.println("Enter destination:"); //Enter in two separate lines
-            String destIP = in.next();
-            int destPort = in.nextInt();
+            System.out.println("Enter destination IP:");
+            String destIP = reader.readLine();
+
+            System.out.println("Enter port on destination host:");
+            int destPort = Integer.parseInt(reader.readLine());
 
             System.out.println("\nEnter message to send: ");
-            connector.send(in.next(), destIP, destPort);
+            String msg = reader.readLine();
+            connector.send(msg, destIP, destPort);
         }
-
-        in.next(); //For program not to close, simple yet effective way
     }
 }
