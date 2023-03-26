@@ -13,6 +13,9 @@ public class Main {
         System.out.println("Set up as receiver?[y/n]");
         String isReceiver = reader.readLine();
 
+        System.out.println("Select protocol:\n\t0 for UDP(default)\n\t1 for TCP");
+        boolean useTCP = reader.readLine() == "1";
+
         int port;
         try{
             port = Integer.parseInt(args[0]);
