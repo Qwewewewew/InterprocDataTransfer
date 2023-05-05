@@ -8,8 +8,9 @@ Mini dual-thread UDP chat app. Just messing around trying to explore ways to tra
 You can either launch the `.jar` in the `./out/` folder or build app by yourself:
 
 ```sh
-javac src/Main.java -d ../bin/
-cd bin/
+cd src/
+javac Main.java -d ../bin/
+cd ../bin/
 ```
 
 Then run
