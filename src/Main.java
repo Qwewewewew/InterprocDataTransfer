@@ -46,7 +46,7 @@ public class Main {
             while(true){
                 String msg = stdin.readLine();
                 connector.send(msg, destIP, destPort);
-                System.out.print("\nYou: " + msg + "\n");
+                System.out.print("You: " + msg + "\n");
             }
         }
     }

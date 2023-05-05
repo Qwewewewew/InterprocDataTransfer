@@ -40,7 +40,6 @@ public class UDPConnector implements IConnector{
                 DatagramPacket pack = new DatagramPacket(buffer, buffer.length, destIP, toPort); //Preparing a package
 
                 dgSocket.send(pack); //Sending it
-                dgSocket.close(); //And closing the socket
             }catch(UnknownHostException e){
                 System.out.println("--Something's wrong with the host: --");
                 System.out.println("--" + e.getMessage() + "--");
@@ -50,5 +49,10 @@ public class UDPConnector implements IConnector{
             System.out.println("--An error has occurred: --"); //And this does not :(
             System.out.println("--" + e.getMessage() + "--");
         }
+    }
+
+    //To close the socket at the end
+    public void close(){
+        dgSocket.close();
     }
 }
