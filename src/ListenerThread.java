@@ -19,7 +19,7 @@ public class ListenerThread extends Thread {
         //main loop
         while(true){ 
             try {
-                System.out.println(Main.destIP + ": " + connector.get());
+                System.out.println("@" + Main.destIP + ": " + connector.get());
             }
             catch(IOException e) {
                 System.out.println("--Something went wrong..--");
