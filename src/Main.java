@@ -37,7 +37,7 @@ public class Main {
 
         //Sender setup
         connector = new UDPConnector(port);
-        System.out.println("\n--CONNECTOR IS SET UP--\n");
+        System.out.println("\n--CONNECTOR IS SET UP--");
 
         //Listener setup
         ListenerThread listener = new ListenerThread(port+1);
@@ -46,7 +46,7 @@ public class Main {
             while(true){
                 String msg = stdin.readLine();
                 connector.send(msg, destIP, destPort);
-                System.out.print("\nYou: " + msg);
+                System.out.print("\nYou: " + msg + "\n");
             }
         }
     }
