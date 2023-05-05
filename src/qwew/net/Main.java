@@ -9,12 +9,9 @@ public class Main {
     static IConnector connector;
     public static void main(String[] args) throws IOException {
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Set up as receiver?[y/n]");
-        String isReceiver = reader.readLine();
-
-        System.out.println("Select protocol:\n\t0 for UDP(default)\n\t1 for TCP");
-        boolean useTCP = reader.readLine() == "1";
+        String isReceiver = stdin.readLine();
 
         int port;
         try{
@@ -22,7 +19,7 @@ public class Main {
         }
         catch(ArrayIndexOutOfBoundsException e){
             System.out.println("Input port to bind to: ");
-            port = Integer.parseInt(reader.readLine());
+            port = Integer.parseInt(stdin.readLine());
         }
 
         //Receiver setup
@@ -38,13 +35,13 @@ public class Main {
             System.out.println("\n--CONNECTOR IS SET UP--\n");
 
             System.out.println("Enter destination IP:");
-            String destIP = reader.readLine();
+            String destIP = stdin.readLine();
 
             System.out.println("Enter port on destination host:");
-            int destPort = Integer.parseInt(reader.readLine());
+            int destPort = Integer.parseInt(stdin.readLine());
 
             System.out.println("\nEnter message to send: ");
-            String msg = reader.readLine();
+            String msg = stdin.readLine();
             connector.send(msg, destIP, destPort);
         }
     }
