@@ -13,7 +13,7 @@ public class ListenerThread extends Thread {
 
     @Override
     public void run(){
-        System.out.println("Listening for messages");
+        System.out.println("--LISTENING--");
         connector = new UDPConnector(listenerPort);
         
         //main loop

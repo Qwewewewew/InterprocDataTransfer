@@ -1,8 +1,8 @@
 package qwew.net;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class Main {
     static IConnector connector;
@@ -42,9 +42,12 @@ public class Main {
         //Listener setup
         ListenerThread listener = new ListenerThread(port+1);
         listener.start();
-
-        System.out.print("\nYou: ");
-        String msg = stdin.readLine();
-        connector.send(msg, destIP, destPort);
+        if(listener.isAlive()) {
+            while(true){
+                String msg = stdin.readLine();
+                connector.send(msg, destIP, destPort);
+                System.out.print("\nYou: " + msg);
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ public class UDPConnector implements IConnector{
         try {
             dgSocket = new DatagramSocket(port);
         }catch (SocketException e){
-            System.out.println("Something's wrong with socket:");
+            System.out.println("Something's wrong with the socket:");
             System.out.println(e.getMessage());
         }
     }
@@ -42,14 +42,13 @@ public class UDPConnector implements IConnector{
                 dgSocket.send(pack); //Sending it
                 dgSocket.close(); //And closing the socket
             }catch(UnknownHostException e){
-                System.out.println("Something's wrong with the host: ");
-                System.out.println(e.getMessage());
+                System.out.println("--Something's wrong with the host: --");
+                System.out.println("--" + e.getMessage() + "--");
             }
 
-            System.out.println("\n--MESSAGE SENT--"); //This message means success
         } catch (IOException e) {
-            System.out.println("An error has occurred: "); //And this does not :(
-            System.out.println(e.getMessage());
+            System.out.println("--An error has occurred: --"); //And this does not :(
+            System.out.println("--" + e.getMessage() + "--");
         }
     }
 }
