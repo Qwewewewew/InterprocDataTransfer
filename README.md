@@ -9,17 +9,17 @@ You can either launch the `.jar` in the `./out/` folder or build app by yourself
 
 ```sh
 cd src/
-javac Main.java -d ../bin/
+javac me/qwew/chat/Main.java -d ../bin/
 cd ../bin/
 ```
 
 Then run
 
 ```sh
-java Main [destIP] [destPort]
+java me.qwew.chat.Main [destIP] [destPort]
 ```
 
-where you can optionally pass `destIP` as destination IP, `destPort` as listening port on destination host 
+where you can optionally pass `destIP` as destination IP, `destPort` as listening port on destination host. If skipped, you will be prompted later. If nothing entered, the defaults are set: `127.0.0.1:8081`
 
 ## Restrictions and issues
 - This client is bind to `8080` and to `8081` ports as sender and listener respectively by default. Can be changed in the code directly
