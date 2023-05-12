@@ -30,7 +30,7 @@ public class SenderThread extends Thread{
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
         connector = new UDPConnector(this.basePort);
         
-        System.out.println("--SENDER THREAD STARTED--\n");
+        System.out.println("--SENDER THREAD STARTED--");
         
         //variable to reassign without wasting memory
         String msg;

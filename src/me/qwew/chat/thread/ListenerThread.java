@@ -15,7 +15,7 @@ public class ListenerThread extends Thread {
 
     @Override
     public void run(){
-        System.out.println("--LISTENING--\n");
+        System.out.println("--LISTENING--");
         connector = new UDPConnector(basePort);
         
         //main loop

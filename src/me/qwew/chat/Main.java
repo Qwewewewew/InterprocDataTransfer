@@ -48,7 +48,7 @@ public class Main {
             }
         }
 
-        System.out.println("--STARTING THREADS--");
+        System.out.println("--STARTING THREADS--\n");
 
         //threads setup
         ListenerThread listener = new ListenerThread(getPort);
