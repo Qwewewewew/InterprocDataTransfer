@@ -1,4 +1,4 @@
-
+package me.qwew.chat.connector;
 
 import java.net.*;
 import java.io.IOException;
@@ -20,13 +20,11 @@ public class UDPConnector implements IConnector{
 
     //Listens for an incoming package, 1 KB limit for now
     @Override
-    public String get() throws IOException {
-        String msg; //Empty String to extract data to
+    public DatagramPacket get() throws IOException {
         DatagramPacket pack = new DatagramPacket(new byte[1024], 1024); //Packet to "catch" data in
         //Receiving package
         dgSocket.receive(pack);
-        msg = new String(pack.getData());
-        return msg;
+        return pack;
     }
 
     //A method to send a message. Parameters: msg - the message itself, toIP - destination host, toPort - port on dest. host
