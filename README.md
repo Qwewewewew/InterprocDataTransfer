@@ -8,6 +8,7 @@ Mini dual-thread UDP chat app. Just messing around trying to explore ways to tra
 You can either launch the `.jar` in the `./out/` folder or build app by yourself:
 
 ```sh
+mkdir -p bin/
 cd src/
 javac me/qwew/chat/Main.java -d ../bin/
 cd ../bin/
